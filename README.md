@@ -18,3 +18,7 @@ Use '-i' so the script can be interactive.
 ### Helper
 
 I made a `help` command like a regular shell have :)
+
+## What's Next?
+* docker-compose
+* Run on K8S
