@@ -1,7 +1,9 @@
-FROM py3buntu
+# Pull the official ubuntu as the base image
+FROM ubuntu
 
+# Install Python3 with APT
 RUN apt update
-RUN apt install python3
+RUN apt -y install python3
 
 # Set work directory
 WORKDIR /docker4fun
