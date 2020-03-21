@@ -1,8 +1,5 @@
 import sys
 
-SYSMSG = "[SYSTEM]: "
-def sys_msg(msg):
-    print("[SYSTEM]: {}".format(msg))
 
 class Room():
     desc = "This is a room, where the Py-Sen world begins."
@@ -19,6 +16,8 @@ class User():
         self.id = id
         self.name = name
 
+def sys_msg(msg):
+    print("[SYSTEM]: {}".format(msg))
 
 def welcome(User):
     print("\nHi {}, welcome to Py-Sen Game!\n".format(User.name))
@@ -41,20 +40,6 @@ def helper(User):
     for cmd in action_dict.keys():
         print("{} ".format(cmd)),
 
-def listener(user):
-    action = ""
-    readline = input("> ").split()
-    print()
-
-    if len(readline) == 0: sys_msg("Wait...You need to do SOMETHING!"); return
-    else: command = readline[0]
-
-    if command in action_dict:
-        action = action_dict[command]
-        action(user)
-    else: sys_msg("Sorry what? What do you mean \"{}\" ?".format(command))
-
-# ------------------------------------------------------------------------------
 action_dict = {
     "loc": loc,
     "info": info,
@@ -62,8 +47,23 @@ action_dict = {
     "help": helper,
     "ls": look
 }
-# ------------------------------------------------------------------------------
 
+def listener(user):
+    action = ""
+    readline = input("> ").split()
+    print()
+
+    if len(readline) == 0:
+        sys_msg("Wait...You need to do SOMETHING!")
+        return
+    else: command = readline[0]
+
+    if command in action_dict:
+        action = action_dict[command]
+        action(user)
+    else: sys_msg("Sorry what? What do you mean \"{}\" ?".format(command))
+
+# ------------------------------------------------------------------------
 login = False
 user = User(1, "Freddy")
 user.location_current = (0, 0)
@@ -71,7 +71,7 @@ user.location_current = (0, 0)
 while True:
     # Initialize environment for User
     if login == False:
-        welcome(user)  # (TODO): Think about making a class for game_init
+        welcome(user)  # (TODO): Use a class for game_init
         room = Room(user.location_current)
 
         print(room.desc)
